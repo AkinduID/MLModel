@@ -22,6 +22,21 @@ from IPython.display import display
 # Flag to control recording state
 is_rec = True
 
+def send_error_request(error_type):
+    # Replace the following URL with the actual endpoint of your web server
+    server_url = "https://your-web-server.com/error-handler"
+    
+    # Send HTTP POST request with error type in the payload
+    payload = {"error_type": error_type}
+    response = requests.post(server_url, data=payload)
+    
+    # Check the response status
+    if response.status_code == 200:
+        st.success(f"Error reported successfully: {error_type}")
+    else:
+        st.error(f"Failed to report error: {error_type}")
+        st.write(f"Response status code: {response.status_code}")
+
 # This fuction records the audio and gives predictions for the audio
 def predict():
     # Recording the audio
@@ -86,15 +101,19 @@ def main():
             if new_preds == 1.0:
                 st.markdown("**Machine ID: Off condition with noise**")
                 st.image("D:\\Documents\\SLIoT\\ML App\\ui\\off.png", caption="Off condition with noise", width=200)
+                send_error_request("Off condition")
             elif new_preds == 2.0:
                 st.markdown("**Machine ID: Healthy condition**")
                 st.image("D:\\Documents\\SLIoT\\ML App\\ui\\good_.png", caption="Healthy condition", width=200)
+                send_error_request("Healthy condition")
             elif new_preds == 3.0:
                 st.markdown("**Machine ID: Bearing Fault**")
                 st.image("D:\\Documents\\SLIoT\\ML App\\ui\\mfault1_.png", caption="Bearing Fault", width=200)
+                send_error_request("Bearing Fault")
             else:
                 st.markdown("**Machine ID: Fan Fault**")
                 st.image("D:\\Documents\\SLIoT\\ML App\\ui\\mfault2.png", caption="Fan Fault", width=200)
+                send_error_request("Fan Fault")
             # st.write(predictions)
             time.sleep(5)
 
