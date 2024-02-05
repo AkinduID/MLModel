@@ -9,8 +9,8 @@ requests
 json
 
 numpy
-scipy.io.wavfile
-scipy.fftpack
+scipy
+scipy
 matplotlib
 
 threading
