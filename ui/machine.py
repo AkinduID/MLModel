@@ -13,11 +13,7 @@ import time
 
 import sounddevice as sd
 import soundfile as sf
-import librosa
 
-from IPython.display import Image
-import ipywidgets as widgets
-from IPython.display import display
 
 # Flag to control recording state
 is_rec = True
