@@ -9,7 +9,7 @@ requests
 numpy
 scipy
 matplotlib
-pyaudio
+librosa
 sounddevice
 soundfile
 librosa
